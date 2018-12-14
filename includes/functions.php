@@ -37,8 +37,12 @@ function getRecette($idRecette) {
 
   $user_check_query = "SELECT * FROM recette where id = '$idRecette'";
   $result = mysqli_query($db, $user_check_query);
-  
+
   return $result->fetch_assoc();
+}
+
+function isUserLogged($idUser) {
+  
 }
 
 ?>

@@ -1,7 +1,7 @@
 <div id="sidebar">
 	<div class="inner">
 
-	<section id="search" class="alt">
+		<section id="search" class="alt">
 			<form method="post" action="#">
 				<input type="text" name="query" id="query" placeholder="Search" />
 			</form>
@@ -12,36 +12,22 @@
 				<h2>Menu</h2>
 			</header>
 			<ul>
-				<li><a href="index.html">Homepage</a></li>
-				<li><a href="generic.html">Register</a></li>
-				<li><a href="elements.html">Elements</a></li>
-				<li>
-					<span class="opener">Submenu</span>
-					<ul>
-						<li><a href="#">Lorem Dolor</a></li>
-						<li><a href="#">Ipsum Adipiscing</a></li>
-						<li><a href="#">Tempus Magna</a></li>
-						<li><a href="#">Feugiat Veroeros</a></li>
-					</ul>
-				</li>
+				<li><a href="/">Page d'accueil</a></li>
+				<?php  if (!isset($_SESSION['username'])) : ?>
+					<li><a href="/register.php">Registre</a></li>
+				<?php endif ?>
+
+				<li><a href="/admin.php">Administration</a></li>
+				<li><a href="/account.php">Mon profil</a></li>
+				<li><a href="/recette.php">Publier une recette</a></li>
 			</ul>
 		</nav>
 
-		<section>
-			<header class="major">
-				<h2>Get in touch</h2>
-			</header>
-			<ul class="contact">
-				<li class="fa-envelope-o"><a href="#">information@untitled.tld</a></li>
-				<li class="fa-phone">(000) 000-0000</li>
-				<li class="fa-home">1234 Somewhere Road #8254<br />
-					Nashville, TN 00000-0000</li>
-				</ul>
-			</section>
+
 
 			<!-- Footer -->
 			<footer id="footer">
-				<p class="copyright">International Catering &copy; | 2018 All rights reserved.</p>
+				<p class="copyright">IMT Atlantique &copy; | 2018 Tous droits réservés.</p>
 			</footer>
 
 		</div>

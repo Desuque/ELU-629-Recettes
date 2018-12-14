@@ -4,11 +4,9 @@
 	<div class="login">
 		<?php  if (isset($_SESSION['username'])) : ?>
 			<div class="row gtr-uniform">
-				<div class="col-6 col-12-xsmall">
+				<div class="col-12" style="text-align: right;">
 					<p>Bienvenu <strong><?php echo $_SESSION['username']; ?></strong></p>
-				</div>
-				<div class="col-6 col-12-xsmall">
-					<p> <a href="index.php?logout='1'" style="color: red;">Fermer la session</a> </p>
+					<a href="index.php?logout='1'" style="color: red;">Fermer la session</a>
 				</div>
 			</div>
 		<?php  else: ?>

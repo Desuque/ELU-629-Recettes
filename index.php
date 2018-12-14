@@ -15,7 +15,7 @@
 <?php include 'includes/server.php';?>
 <html>
 <head>
-	<title>Home Page | International Catering</title>
+	<title>Page d'accueil</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
