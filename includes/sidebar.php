@@ -16,19 +16,23 @@
 				<?php  if (!isset($_SESSION['username'])) : ?>
 					<li><a href="/register.php">Registre</a></li>
 				<?php endif ?>
+				<?php  if (isset($_SESSION['username'])) : ?>
+					<li><a href="/account.php">Mon profil</a></li>
+					<li><a href="/recette.php">Publier une recette</a></li>
+				<?php endif ?>
+				<?php  if (isAdministrator()) : ?>
+					<li><a href="/admin.php">Administration</a></li>
+				<?php endif ?>
 
-				<li><a href="/admin.php">Administration</a></li>
-				<li><a href="/account.php">Mon profil</a></li>
-				<li><a href="/recette.php">Publier une recette</a></li>
 			</ul>
 		</nav>
 
 
 
-			<!-- Footer -->
-			<footer id="footer">
-				<p class="copyright">IMT Atlantique &copy; | 2018 Tous droits réservés.</p>
-			</footer>
+		<!-- Footer -->
+		<footer id="footer">
+			<p class="copyright">IMT Atlantique &copy; | 2018 Tous droits réservés.</p>
+		</footer>
 
-		</div>
 	</div>
+</div>

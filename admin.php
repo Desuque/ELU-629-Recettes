@@ -1,9 +1,9 @@
 <?php include 'includes/server.php' ?>
 <?php include 'includes/functions.php' ?>
 
-<?php if (!getPermission()){ 
-    header("Location:error.php");
-    die();
+<?php if ((!isset($_SESSION['username'])) || (!isAdministrator())){
+	header("Location:error.php");
+	die();
 }
 ?>
 
@@ -110,24 +110,24 @@
 										<td><?php echo $statut_nom; ?></td>
 										<td>
 											<?php  if (($statut == '1') || ($statut == '2')) : ?>
-											<a title="Débloquer utilisateur" href="admin.php?unlockUser=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/checked.png" />
-											</a>
+												<a title="Débloquer utilisateur" href="admin.php?unlockUser=<?php echo $utilisateur['id'] ?>" onclick="">
+													<img src="images/checked.png" />
+												</a>
 											<?php endif ?>
 											<?php  if (($statut != '1')) : ?>
-											<a title="Bloquer utilisateur" href="admin.php?lockUser=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/delete.png" />
-											</a>
+												<a title="Bloquer utilisateur" href="admin.php?lockUser=<?php echo $utilisateur['id'] ?>" onclick="">
+													<img src="images/delete.png" />
+												</a>
 											<?php endif ?>
 											<?php  if ($statut != '2') : ?>											
-											<a title="Éliminer utilisateur" href="admin.php?eliminerUser=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/bin.png" />
-											</a>
+												<a title="Éliminer utilisateur" href="admin.php?eliminerUser=<?php echo $utilisateur['id'] ?>" onclick="">
+													<img src="images/bin.png" />
+												</a>
 											<?php endif ?>
 											<?php  if ($statut != '3') : ?>
-											<a title="Définir en tant que modérateur" href="admin.php?setModerator=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/shield.png" />
-											</a>
+												<a title="Définir en tant que modérateur" href="admin.php?setModerator=<?php echo $utilisateur['id'] ?>" onclick="">
+													<img src="images/shield.png" />
+												</a>
 											<?php endif ?>
 										</td>
 									</tr>

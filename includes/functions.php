@@ -18,18 +18,19 @@ function getUtilisateurs() {
   return $result;
 }
 
-function getPermission() {
-  return true; //FALTAAAAAAAAAAAAAAVALIDAR ESTO !!!!!!!!!!!!!!!!
+function isAdministrator() {
   include('setup.php');
 
-  if (isset($_SESSION['username'])) {
-
-  }
-
+  $idUser = $_SESSION['userid'];
   $user_check_query = "SELECT * FROM person where id = '$idUser'";
   $result = mysqli_query($db, $user_check_query);
 
-  return $result->fetch_assoc();
+  $user = $result->fetch_assoc();
+  if ($user['type'] == 3) { // 3 -> Administrator
+    return true;
+  }
+
+  return false;
 }
 
 function getRecette($idRecette) {
@@ -41,8 +42,13 @@ function getRecette($idRecette) {
   return $result->fetch_assoc();
 }
 
-function isUserLogged($idUser) {
-  
+function getUser($idUser) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM person where id = '$idUser'";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result->fetch_assoc();
 }
 
 ?>
