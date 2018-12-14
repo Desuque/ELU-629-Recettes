@@ -78,4 +78,39 @@ if(isset($_GET["accepterRecette"]))
   mysqli_query($db, $query);
 }
 
+if(isset($_GET["eliminerRecette"]))
+{
+  $idRecette = htmlspecialchars($_GET["eliminerRecette"]);
+  $query = "UPDATE recette SET statut = 2 where id = '$idRecette'" ;
+  mysqli_query($db, $query);
+}
+
+if(isset($_GET["unlockUser"]))
+{
+  $idUser = htmlspecialchars($_GET["unlockUser"]);
+  $query = "UPDATE person SET type = 0 where id = '$idUser'" ;
+  mysqli_query($db, $query);
+}
+
+if(isset($_GET["lockUser"]))
+{
+  $idUser = htmlspecialchars($_GET["lockUser"]);
+  $query = "UPDATE person SET type = 1 where id = '$idUser'" ;
+  mysqli_query($db, $query);
+}
+
+if(isset($_GET["eliminerUser"]))
+{
+  $idUser = htmlspecialchars($_GET["eliminerUser"]);
+  $query = "UPDATE person SET type = 2 where id = '$idUser'" ;
+  mysqli_query($db, $query);
+}
+
+if(isset($_GET["setModerator"]))
+{
+  $idUser = htmlspecialchars($_GET["setModerator"]);
+  $query = "UPDATE person SET type = 3 where id = '$idUser'" ;
+  mysqli_query($db, $query);
+}
+
 ?>
