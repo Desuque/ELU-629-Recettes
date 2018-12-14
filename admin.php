@@ -1,6 +1,12 @@
 <?php include 'includes/server.php' ?>
 <?php include 'includes/functions.php' ?>
 
+<?php if (!getPermission()){ 
+    header("Location:error.php");
+    die();
+}
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -19,7 +25,6 @@
 					<header class="major">
 						<h2>Administration</h2>
 					</header>
-
 					<h3>Recettes en attente de modération</h3>
 
 					<div class="table-wrapper">
@@ -44,12 +49,11 @@
 										<td><?php echo($rec['date']); ?></td>
 										<td><?php echo($rec['iduser']); ?></td>
 										<td>
-											<a href="admin.php?accepterRecette=<?php echo $rec['id'] ?>" onclick="">
-												<img src="images/checked.png" alt="Accepter" />
+											<a title="Accepter" href="admin.php?accepterRecette=<?php echo $rec['id'] ?>" onclick="">
+												<img src="images/checked.png" />
 											</a>
-											|
-											<a href="admin.php?eliminerRecette=<?php echo $rec['id'] ?>" onclick="">
-												<img src="images/delete.png" alt="Éliminer" />
+											<a title="Éliminer" href="admin.php?eliminerRecette=<?php echo $rec['id'] ?>" onclick="">
+												<img src="images/delete.png" />
 											</a>
 										</td>
 									</tr>
@@ -80,8 +84,7 @@
 								// 0 -> Normal user
 								// 1 -> Bloqued user
 								// 2 -> Eliminated user
-								// 3 -> Moderator
-								// 4 -> Administrator
+								// 3 -> Administrator
 								$utilisateurs = getUtilisateurs();
 								while ($utilisateur = $utilisateurs->fetch_assoc()) {
 									$statut = $utilisateur['type'];
@@ -96,9 +99,6 @@
 										$statut_nom = "Utilisateur supprimé";
 									}
 									if($statut == '3') {
-										$statut_nom = "Modérateur";
-									}
-									if($statut == '4') {
 										$statut_nom = "Administrateur";
 									}
 									?>
@@ -110,23 +110,23 @@
 										<td><?php echo $statut_nom; ?></td>
 										<td>
 											<?php  if (($statut == '1') || ($statut == '2')) : ?>
-											<a href="admin.php?unlockUser=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/checked.png" alt="Débloquer utilisateur" />
+											<a title="Débloquer utilisateur" href="admin.php?unlockUser=<?php echo $utilisateur['id'] ?>" onclick="">
+												<img src="images/checked.png" />
 											</a>
 											<?php endif ?>
 											<?php  if (($statut != '1')) : ?>
-											<a href="admin.php?lockUser=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/delete.png" alt="Bloquer utilisateur" />
+											<a title="Bloquer utilisateur" href="admin.php?lockUser=<?php echo $utilisateur['id'] ?>" onclick="">
+												<img src="images/delete.png" />
 											</a>
 											<?php endif ?>
 											<?php  if ($statut != '2') : ?>											
-											<a href="admin.php?eliminerUser=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/bin.png" alt="Éliminer utilisateur" />
+											<a title="Éliminer utilisateur" href="admin.php?eliminerUser=<?php echo $utilisateur['id'] ?>" onclick="">
+												<img src="images/bin.png" />
 											</a>
 											<?php endif ?>
 											<?php  if ($statut != '3') : ?>
-											<a href="admin.php?setModerator=<?php echo $utilisateur['id'] ?>" onclick="">
-												<img src="images/shield.png" alt="Définir en tant que modérateur" />
+											<a title="Définir en tant que modérateur" href="admin.php?setModerator=<?php echo $utilisateur['id'] ?>" onclick="">
+												<img src="images/shield.png" />
 											</a>
 											<?php endif ?>
 										</td>

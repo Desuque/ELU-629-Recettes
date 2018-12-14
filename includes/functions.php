@@ -18,4 +18,18 @@ function getUtilisateurs() {
   return $result;
 }
 
+function getPermission() {
+  return true;
+  include('setup.php');
+
+  if (isset($_SESSION['username'])) {
+
+  }
+
+  $user_check_query = "SELECT * FROM person where id = '$idUser'";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result->fetch_assoc();
+}
+
 ?>

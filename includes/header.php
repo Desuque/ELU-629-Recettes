@@ -5,10 +5,10 @@
 		<?php  if (isset($_SESSION['username'])) : ?>
 			<div class="row gtr-uniform">
 				<div class="col-6 col-12-xsmall">
-					<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+					<p>Bienvenu <strong><?php echo $_SESSION['username']; ?></strong></p>
 				</div>
 				<div class="col-6 col-12-xsmall">
-					<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
+					<p> <a href="index.php?logout='1'" style="color: red;">Fermer la session</a> </p>
 				</div>
 			</div>
 		<?php  else: ?>
@@ -17,16 +17,16 @@
 				<div class="row gtr-uniform">
 
 					<div class="col-6 col-12-xsmall">
-						<input type="text" name="username" placeholder="Usuario">
+						<input type="text" name="username" placeholder="Utilisateur">
 					</div>
 					<div class="col-6 col-12-xsmall">
-						<input type="password" name="password" placeholder="Password">
+						<input type="password" name="password" placeholder="Mot de passe">
 					</div>
 
 					<div class="col-12">
 						<ul class="actions">
-							<li><button type="submit" class="btn" name="login_user">Login</button></li>
-							<li>Not yet a member? <a href="register.php">Sign up</a></li>
+							<li><button type="submit" class="btn" name="login_user">S'identifier</button></li>
+							<li>Pas encore membre? <a href="register.php">S'inscrire</a></li>
 						</ul>
 					</div>
 				</div>
