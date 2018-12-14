@@ -19,7 +19,7 @@ function getUtilisateurs() {
 }
 
 function getPermission() {
-  return true;
+  return true; //FALTAAAAAAAAAAAAAAVALIDAR ESTO !!!!!!!!!!!!!!!!
   include('setup.php');
 
   if (isset($_SESSION['username'])) {
@@ -29,6 +29,15 @@ function getPermission() {
   $user_check_query = "SELECT * FROM person where id = '$idUser'";
   $result = mysqli_query($db, $user_check_query);
 
+  return $result->fetch_assoc();
+}
+
+function getRecette($idRecette) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM recette where id = '$idRecette'";
+  $result = mysqli_query($db, $user_check_query);
+  
   return $result->fetch_assoc();
 }
 
