@@ -51,4 +51,14 @@ function getUser($idUser) {
   return $result->fetch_assoc();
 }
 
+
+function getLastsRecettes() {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM recette ORDER BY id DESC LIMIT 10";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result;
+}
+
 ?>
