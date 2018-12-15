@@ -131,5 +131,144 @@ if(isset($_GET["setModerator"]))
   $query = "UPDATE person SET type = 3 where id = '$idUser'" ;
   mysqli_query($db, $query);
 }
+if (isset($_POST['reg_recette'])) {
+
+  $nombre = $_FILES['imagen']['name'];
+  $nomphoto = strtolower($nombre);
+
+  $cd=$_FILES['imagen']['tmp_name'];
+  $ruta = "img/" . $_FILES['imagen']['name'];
+  $destino = "img/".$nombrer;
+  $resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
+
+  $Utensilles = $_POST['utname'];
+  $Ingredients = $_POST['ingname'];
+  $Etapes = $_POST['etname1'];
+  //$i=0;
+  //echo $Ingredients[0];
+  $Ingredients;
+  $Utensilles;
+  $Etapes;
+
+  $parsedIng = str_getcsv(
+    $Ingredients, # Input line
+    '{',   # Delimiter
+    '"',   # Enclosure
+    '\\'   # Escape char
+  );
+
+  
+  $i=0;
+  while($i<count($parsedIng)-1){
+    $parsedIng[$i];
+    $i++;
+  }
+
+  $parsedUt = str_getcsv(
+    $Utensilles, # Input line
+    '{',   # Delimiter
+    '"',   # Enclosure
+    '\\'   # Escape char
+  );
+
+  $i=0;
+  while($i<count($parsedUt)-1){
+    $parsedUt[$i];
+    $i++;
+  }
+
+  $parsedEt = str_getcsv(
+    $Etapes, # Input line
+    '{',   # Delimiter
+    '"',   # Enclosure
+    '\\'   # Escape char
+  );
+
+  
+  $i=0;
+  while($i<count($parsedEt)-1){
+    $parsedEt[$i];
+    $i++;
+  }
+
+
+
+
+
+  $titre = mysqli_real_escape_string($db, $_POST['titre']);
+  $dureecui = mysqli_real_escape_string($db, $_POST['dureecuisson']);
+  $dureerepos = mysqli_real_escape_string($db, $_POST['dureerepos']);
+  $dureeprepa = mysqli_real_escape_string($db, $_POST['dureeprepa']);
+  $categorie = mysqli_real_escape_string($db, $_POST['categorie']);
+
+
+
+
+
+
+  $diff = $_POST['diffname'];
+  $cout = $_POST['coutname'];
+
+        
+
+  if (empty($titre)) { 
+    array_push($errors, "Veuillez saisir le titre");
+  }
+  if (empty($dureecui)) { 
+    array_push($errors, "Veuillez saisir le duree cuisson");
+  }
+  if (empty($dureerepos)) { 
+    array_push($errors, "Veuillez saisir le duree repos");
+  }
+  if (empty($dureeprepa)) { 
+    array_push($errors, "Veuillez saisir le duree preparation");
+  }
+  if (empty($dureeprepa)) { 
+    array_push($errors, "Veuillez saisir le duree categorie");
+  }
+  
+  
+  $query = "SELECT * FROM recette WHERE id > 0 ORDER BY id DESC LIMIT 1";
+    $results = mysqli_query($db, $query);
+    if (mysqli_num_rows($results) == 1) {
+      while ($row = mysqli_fetch_assoc($results))
+      {
+        $idrecette = $row['id'];
+      }
+  }
+  $iduser = $_SESSION['userid'];
+  $now = date("Y-m-d");
+  if (count($errors) == 0) {
+  	$query = "INSERT INTO recette (titre,iduser,date,photo,statut) 
+  			  VALUES('$titre','$iduser','$now','$nomphoto',0)";
+    mysqli_query($db, $query);
+
+    $query = "SELECT * FROM recette WHERE id > 0 ORDER BY id DESC LIMIT 1";
+    $results = mysqli_query($db, $query);
+    if (mysqli_num_rows($results) == 1) {
+      while ($row = mysqli_fetch_assoc($results))
+      {
+        $idrecette = $row['id'];
+      }
+    }
+    $query = "INSERT INTO information (idrecette,dureecui,dureerepos,dureeprep,diff,cout,categorie) 
+    VALUES('$idrecette',$dureecui,$dureerepos,$dureeprepa,$diff,$cout,'$categorie')";
+    mysqli_query($db, $query);
+    $query = "INSERT INTO ingredients (idrecette,nom) 
+    VALUES('$idrecette','$Ingredients')";
+    mysqli_query($db, $query);
+    $query = "INSERT INTO utensilles (idrecette,nom) 
+    VALUES('$idrecette','$Utensilles')";
+    mysqli_query($db, $query);
+    $i=0;
+    while($i<count($parsedEt)-1){
+      $query = "INSERT INTO etapes (idrecette,idordre,nom) 
+                VALUES('$idrecette',$i,'$parsedEt[$i]')";
+      mysqli_query($db, $query);
+      $i++;
+    }
+  	header('location: index.php');
+  }
+}
 
 ?>

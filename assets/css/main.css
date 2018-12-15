@@ -2447,6 +2447,7 @@
 
 			/* Button */
 
+			input[type="file"],
 			input[type="submit"],
 			input[type="reset"],
 			input[type="button"],
@@ -2480,6 +2481,7 @@
 				white-space: nowrap;
 			}
 
+			input[type="file"]:hover,
 			input[type="submit"]:hover,
 			input[type="reset"]:hover,
 			input[type="button"]:hover,
@@ -2488,6 +2490,7 @@
 				background-color: rgba(245, 106, 106, 0.05);
 			}
 
+			input[type="file"]:active,
 			input[type="submit"]:active,
 			input[type="reset"]:active,
 			input[type="button"]:active,
@@ -2496,6 +2499,7 @@
 				background-color: rgba(245, 106, 106, 0.15);
 			}
 
+			input[type="file"]:before,
 			input[type="submit"].icon:before,
 			input[type="reset"].icon:before,
 			input[type="button"].icon:before,
@@ -2504,6 +2508,7 @@
 				margin-right: 0.5em;
 			}
 
+			input[type="file"].fit,
 			input[type="submit"].fit,
 			input[type="reset"].fit,
 			input[type="button"].fit,
@@ -2512,6 +2517,7 @@
 				width: 100%;
 			}
 
+			input[type="file"].small,
 			input[type="submit"].small,
 			input[type="reset"].small,
 			input[type="button"].small,
@@ -2520,6 +2526,7 @@
 				font-size: 0.6em;
 			}
 
+			input[type="file"].large,
 			input[type="submit"].large,
 			input[type="reset"].large,
 			input[type="button"].large,
@@ -2530,6 +2537,7 @@
 				line-height: 3.65em;
 			}
 
+			input[type="file"].primary,
 			input[type="submit"].primary,
 			input[type="reset"].primary,
 			input[type="button"].primary,
@@ -2539,7 +2547,7 @@
 				box-shadow: none;
 				color: #ffffff !important;
 			}
-
+			input[type="file"].primary:hover,
 			input[type="submit"].primary:hover,
 			input[type="reset"].primary:hover,
 			input[type="button"].primary:hover,
@@ -2548,6 +2556,7 @@
 				background-color: #f67878;
 			}
 
+			input[type="file"].primary:active,
 			input[type="submit"].primary:active,
 			input[type="reset"].primary:active,
 			input[type="button"].primary:active,
@@ -2556,6 +2565,7 @@
 				background-color: #f45c5c;
 			}
 
+			input[type="file"].disables, input[type="file"]:disabled,
 			input[type="submit"].disabled, input[type="submit"]:disabled,
 			input[type="reset"].disabled,
 			input[type="reset"]:disabled,

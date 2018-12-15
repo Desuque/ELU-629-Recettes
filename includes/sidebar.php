@@ -12,7 +12,7 @@
 				<?php endif ?>
 				<?php  if (isset($_SESSION['username'])) : ?>
 					<li><a href="/account.php">Mon profil</a></li>
-					<li><a href="/recette.php">Publier une recette</a></li>
+					<li><a href="/newrecette.php">Publier une recette</a></li>
 				<?php endif ?>
 				<?php  if (isAdministrator()) : ?>
 					<li><a href="/admin.php">Administration</a></li>
