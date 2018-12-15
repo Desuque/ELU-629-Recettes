@@ -1,11 +1,10 @@
 <?php
 session_start();
+include('setup.php');
 
 $username = "";
 $email    = "";
 $errors = array(); 
-
-$db = mysqli_connect('localhost', 'root', 'root123', 'recette');
 
 if (isset($_POST['update_user'])) {
   $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -13,10 +12,10 @@ if (isset($_POST['update_user'])) {
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
   $iduser = $_SESSION['userid'];
 
-  if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
+  if (empty($email)) { array_push($errors, "Email requis"); }
+  if (empty($password_1)) { array_push($errors, "Mot de passe requis"); }
   if ($password_1 != $password_2) {
-   array_push($errors, "The two passwords do not match");
+   array_push($errors, "Les deux mots de passe ne correspondent pas");
  }
 
  if (count($errors) == 0) {
@@ -32,11 +31,11 @@ if (isset($_POST['reg_user'])) {
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
 
-  if (empty($username)) { array_push($errors, "Username is required"); }
-  if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
+  if (empty($username)) { array_push($errors, "Nom d'utilisateur requis"); }
+  if (empty($email)) { array_push($errors, "Email requis"); }
+  if (empty($password_1)) { array_push($errors, "Mot de passe requis"); }
   if ($password_1 != $password_2) {
-   array_push($errors, "The two passwords do not match");
+   array_push($errors, "Les deux mots de passe ne correspondent pas");
  }
 
  $user_check_query = "SELECT * FROM person WHERE username='$username' OR email='$email' LIMIT 1";
@@ -45,11 +44,11 @@ if (isset($_POST['reg_user'])) {
 
  if ($user) {
   if ($user['username'] === $username) {
-    array_push($errors, "Username already exists");
+    array_push($errors, "Ce nom d'utilisateur existe déjà");
   }
 
   if ($user['email'] === $email) {
-    array_push($errors, "email already exists");
+    array_push($errors, "L'email existe déjà");
   }
 }
 
@@ -69,10 +68,10 @@ if (isset($_POST['login_user'])) {
   $password = mysqli_real_escape_string($db, $_POST['password']);
 
   if (empty($username)) {
-    array_push($errors, "Username is required");
+    array_push($errors, "Nom d'utilisateur est nécessaire");
   }
   if (empty($password)) {
-    array_push($errors, "Password is required");
+    array_push($errors, "Mot de passe requis");
   }
 
   if (count($errors) == 0) {
@@ -86,7 +85,7 @@ if (isset($_POST['login_user'])) {
       $_SESSION['username'] = $username;
       header('location: index.php');
     }else {
-      array_push($errors, "Wrong username/password combination");
+      array_push($errors, "Faux combinaison de Nom d'utilisateur / Mot de passe");
     }
   }
 }
