@@ -1,12 +1,6 @@
 <div id="sidebar">
 	<div class="inner">
 
-		<section id="search" class="alt">
-			<form method="post" action="#">
-				<input type="text" name="query" id="query" placeholder="Search" />
-			</form>
-		</section>
-
 		<nav id="menu">
 			<header class="major">
 				<h2>Menu</h2>
@@ -27,9 +21,6 @@
 			</ul>
 		</nav>
 
-
-
-		<!-- Footer -->
 		<footer id="footer">
 			<p class="copyright">IMT Atlantique &copy; | 2018 Tous droits réservés.</p>
 		</footer>
