@@ -1,5 +1,5 @@
 <header id="header">
-	<a href="./" class="logo"><img class="logo" src="images/logo.png" alt="International Catering" /></a>
+	<a href="/" class="logo"><img class="logo" src="images/logo.png" alt="International Catering" /></a>
 
 	<div class="login">
 		<?php  if (isset($_SESSION['username'])) : ?>

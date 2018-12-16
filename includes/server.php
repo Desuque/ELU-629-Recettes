@@ -1,7 +1,5 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
+session_start();
 include('setup.php');
 
 $username = "";
@@ -331,120 +329,6 @@ if (count($errors) == 0) {
   }
   header('location: index.php');
 }
-}
-
-
-/* POST COMMENT */
-
-if (isset($_POST['comment_rec'])) {
-
-    $commentaire = mysqli_real_escape_string($db, $_POST['commentaire']);
-    $username = $_SESSION['username'];
-
-    if (empty($commentaire)) {
-        array_push($errors, " ");
-        $notcomment = "err1";
-    }
-
-    $query_id = "SELECT id FROM comments ORDER BY id DESC LIMIT 1";
-    $results = mysqli_query($db, $query_id);
-    if (mysqli_num_rows($results) == 1) {
-        while ($row = mysqli_fetch_assoc($results)) {
-            $id = $row['id'];
-        }
-
-    $id_rec = $_GET['idRecette'];
-
-    if (count($errors) == 0) {
-        $hoy = date("Y-m-d H:i:s");
-        $comment_insert_query = "INSERT INTO comments(idrec, id, username, day ,commentaire) VALUES($id_rec, $id +1 ,'$username','$hoy','$commentaire')";
-        mysqli_query($db, $comment_insert_query) or die('Error, insert query failed');
-        header("location: ./recette.php?idRecette=$id_rec#comment_title");
-    }
-    }
-    else{
-        array_push($errors, " ");
-        $notcomment = "err2";
-    }
-
-}
-
-
-
-/* SET COMMENT */
-
-if (isset($_POST['comment_mod'])) {
-  if (isset($_GET["editer_commentaire_admin"])){
-  $id_comment = $_GET["editer_commentaire_admin"];
-  $commentaire = mysqli_real_escape_string($db, $_POST['commentaire']);
-  $username = $_SESSION['username'];
-
-  if (empty($commentaire)) {
-      array_push($errors, " ");
-      $notcomment = "err1";
-  }
-
-      $id_rec = $_GET['idRecette'];
-
-  if (count($errors) == 0) {
-      $hoy = date("Y-m-d H:i:s");
-      $comment_set_query = "UPDATE comments SET commentaire = '$commentaire', day = '$hoy' where idrec = $id_rec and id= $id_comment";
-      mysqli_query($db, $comment_set_query) or die('Error, insert query failed');
-      header("location: ./recette.php?idRecette=$id_rec#comment_title");
-  }
-
-  else{
-      array_push($errors, " ");
-      $notcomment = "not";
-  }}
-
-  if (isset($_GET["editer_commentaire"])){
-      $id_comment = $_GET["editer_commentaire"];
-      $commentaire = mysqli_real_escape_string($db, $_POST['commentaire']);
-      $username = $_SESSION['username'];
-
-      if (empty($commentaire)) {
-          array_push($errors, " ");
-          $notcomment = "err1";
-      }
-
-      $id_rec = $_GET['idRecette'];
-
-      if (count($errors) == 0) {
-          $hoy = date("Y-m-d H:i:s");
-          $comment_set_query = "UPDATE comments SET commentaire = '$commentaire', day = '$hoy' where idrec = $id_rec and id= $id_comment and username='$username'";
-          mysqli_query($db, $comment_set_query) or die('Error, insert query failed');
-          header("location: ./recette.php?idRecette=$id_rec#comment_title");
-      }
-
-      else{
-          array_push($errors, " ");
-          $notcomment = "not";
-      }}
-
-}
-
-
-
-/* DELETE COMMENT */
-
-if(isset($_GET["supprimer_commentaire"])){
-  $id_comment = intval(htmlspecialchars($_GET["supprimer_commentaire"]));
-  $id_rec = intval(htmlspecialchars($_GET["idRecette"]));
-  $username = $_SESSION["username"];
-  $comment_delete_query = "DELETE FROM comments where idrec = $id_rec and id= $id_comment and username= '$username'";
-  mysqli_query($db, $comment_delete_query) or die('Error, insert query failed');
-
-
-}
-
-if(isset($_GET["supprimer_commentaire_admin"])){
-  $id_comment = intval(htmlspecialchars($_GET["supprimer_commentaire_admin"]));
-  $id_rec = intval(htmlspecialchars($_GET["idRecette"]));
-  $comment_delete_query = "DELETE FROM comments where idrec = $id_rec and id= $id_comment";
-  mysqli_query($db, $comment_delete_query) or die('Error, insert query failed');
-
-
 }
 
 ?>
