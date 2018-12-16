@@ -33,7 +33,7 @@ if (isset($_POST['new_comment'])) {
   if (count($errors) == 0) {
     $username = $_SESSION['userid'];
     $idrecette = $_POST['idrecette'];
-    $now = date("Y-m-d");
+    $now = date("Y-m-d h:i:sa");
 
     $query = "INSERT INTO commentaire (iduser, idrecette, texte, date) 
     VALUES('$username', '$idrecette', '$commentaire', '$now')";
@@ -268,7 +268,7 @@ while($i<count($parsedEt)-1){
 
 
 $iduser = $_SESSION['userid'];
-$now = date("Y-m-d");
+$now = date("Y-m-d h:i:sa");
 if (count($errors) == 0) {
 
   $resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
