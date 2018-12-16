@@ -159,30 +159,33 @@ else {
 					</header>
 
 					<?php
-					$recettes_mod = getRecettesMod();
-					while ($rec = $recettes_mod->fetch_assoc()) {
+					$Commentaires = getCommentaires($idRct);
+					while ($com = $Commentaires->fetch_assoc()) {
 						?>
 
-						<h3>Blockquote</h3>
-						<blockquote>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.</blockquote>
+						<h3><?php $user = getNomUser($com['iduser']); echo ($user['username']); ?> | <?php echo($com['date']); ?></h3>
+						<blockquote><?php echo($com['texte']); ?></blockquote>
 
 						<?php
 					}
 					?>
-					
+
 					<?php  if (isset($_SESSION['username']) && (!isOwer($idRct))) : ?>
-						<div class="col-12">
-							<textarea name="demo-message" id="demo-message" placeholder="Entrez votre message" rows="6" maxlength="500" name="Commentaire" /></textarea>
-						</div>
-						<br/>
-						<div class="col-12">
-							<ul class="actions">
-								<li><input type="submit" value="Envoyer le message" class="primary" name="new_comment" /></li>
-							</ul>
-						</div>
+						<form method="post" action='<?php echo ('/recette.php?idRecette=' . $idRct ) ?>'>
+							<?php include 'includes/errors.php'; ?>
+							<div class="col-12">
+								<input type="hidden" name="idrecette" id="demo-name" value='<?php echo ($idRct) ?>' />
+								<textarea id="demo-message" placeholder="Entrez votre message" rows="6" maxlength="500" name="commentaire" /></textarea>
+							</div>
+							<br/>
+							<div class="col-12">
+								<ul class="actions">
+									<li><input type="submit" value="Envoyer le message" class="primary" name="new_comment" /></li>
+								</ul>
+							</div>
+						</form>
 					<?php endif ?>
 				</section>
-
 
 			</div>
 		</div>

@@ -25,6 +25,23 @@ if (isset($_POST['update_user'])) {
  }
 }
 
+if (isset($_POST['new_comment'])) {
+  $commentaire = mysqli_real_escape_string($db, $_POST['commentaire']);
+  
+  if (empty($commentaire)) { array_push($errors, "Le commentaire ne peut pas être vide"); }
+
+  if (count($errors) == 0) {
+    $username = $_SESSION['userid'];
+    $idrecette = $_POST['idrecette'];
+    $now = date("Y-m-d");
+
+    $query = "INSERT INTO commentaire (iduser, idrecette, texte, date) 
+    VALUES('$username', '$idrecette', '$commentaire', '$now')";
+
+    mysqli_query($db, $query);
+  }
+}
+
 if (isset($_POST['reg_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -151,7 +168,7 @@ if (isset($_POST['reg_recette'])) {
   $diff = $_POST['diffname'];
   $cout = $_POST['coutname'];
   
-        
+
 
   if (empty($titre)) { 
     array_push($errors, "Veuillez saisir le titre");
@@ -160,150 +177,150 @@ if (isset($_POST['reg_recette'])) {
     array_push($errors, "Veuillez saisir la durée cuisson");
   }
   if( !ctype_digit(substr($dureecui,0,2)) || 
-      !ctype_digit(substr($dureecui,3,2)) || 
-      substr($dureecui,2,1) != ':'|| 
-      substr($dureecui,0,2) >'24'|| 
-      substr($dureecui,3,2) >'60'){
+    !ctype_digit(substr($dureecui,3,2)) || 
+    substr($dureecui,2,1) != ':'|| 
+    substr($dureecui,0,2) >'24'|| 
+    substr($dureecui,3,2) >'60'){
     array_push($errors, "Veuillez saisir correctement la durée cuisson");
-  }
-  
-  if (empty($dureerepos)) { 
-    array_push($errors, "Veuillez saisir le duree repos");
-  }
-  if( !ctype_digit(substr($dureerepos,0,2)) || 
-      !ctype_digit(substr($dureerepos,3,2)) || 
-      substr($dureerepos,2,1) != ':'|| 
-      substr($dureerepos,0,2) >'24'|| 
-      substr($dureerepos,3,2) >'60'){
-    array_push($errors, "Veuillez saisir correctement la durée répos");
-  }
+}
 
-  if (empty($dureeprepa)) { 
-    array_push($errors, "Veuillez saisir le duree preparation");
-  }
-  if( !ctype_digit(substr($dureeprepa,0,2)) || 
-        !ctype_digit(substr($dureeprepa,3,2)) || 
-        substr($dureeprepa,2,1) != ':'|| 
-        substr($dureeprepa,0,2) >'24'|| 
-        substr($dureeprepa,3,2) >'60'){
-    array_push($errors, "Veuillez saisir correctement la durée preparation");
-  }
-  if ($cout == null ) { 
-    array_push($errors, "Veuillez selectioner coût de la recette");
-  }
-  if ($diff == null ) { 
-    array_push($errors, "Veuillez selectioner difficulté de la recette");
-  }
-  if($nombre == null || $cd == null || $ruta  == null|| $destino  == null){
-    array_push($errors, "Problème avec la photo, reessayez");
-  }
-  if(substr($nombrer,strpos($nombrer, '.')+1) != 'png'){
-    array_push($errors, "Sélectionner photo avec format .png");
-  }
+if (empty($dureerepos)) { 
+  array_push($errors, "Veuillez saisir le duree repos");
+}
+if( !ctype_digit(substr($dureerepos,0,2)) || 
+  !ctype_digit(substr($dureerepos,3,2)) || 
+  substr($dureerepos,2,1) != ':'|| 
+  substr($dureerepos,0,2) >'24'|| 
+  substr($dureerepos,3,2) >'60'){
+  array_push($errors, "Veuillez saisir correctement la durée répos");
+}
 
-  if (empty($Ingredients)) { 
-    array_push($errors, "Veuillez saisir des ingrédients");
-  }
-  if (empty($Utensilles)) { 
-    array_push($errors, "Veuillez saisir des uténsilles");
-  }
-  if (empty($Etapes)) { 
-    array_push($errors, "Veuillez saisir des étapes");
-  }
-  
-   $parsedIng = str_getcsv(
+if (empty($dureeprepa)) { 
+  array_push($errors, "Veuillez saisir le duree preparation");
+}
+if( !ctype_digit(substr($dureeprepa,0,2)) || 
+  !ctype_digit(substr($dureeprepa,3,2)) || 
+  substr($dureeprepa,2,1) != ':'|| 
+  substr($dureeprepa,0,2) >'24'|| 
+  substr($dureeprepa,3,2) >'60'){
+  array_push($errors, "Veuillez saisir correctement la durée preparation");
+}
+if ($cout == null ) { 
+  array_push($errors, "Veuillez selectioner coût de la recette");
+}
+if ($diff == null ) { 
+  array_push($errors, "Veuillez selectioner difficulté de la recette");
+}
+if($nombre == null || $cd == null || $ruta  == null|| $destino  == null){
+  array_push($errors, "Problème avec la photo, reessayez");
+}
+if(substr($nombrer,strpos($nombrer, '.')+1) != 'png'){
+  array_push($errors, "Sélectionner photo avec format .png");
+}
+
+if (empty($Ingredients)) { 
+  array_push($errors, "Veuillez saisir des ingrédients");
+}
+if (empty($Utensilles)) { 
+  array_push($errors, "Veuillez saisir des uténsilles");
+}
+if (empty($Etapes)) { 
+  array_push($errors, "Veuillez saisir des étapes");
+}
+
+$parsedIng = str_getcsv(
     $Ingredients, # Input line
     '{',   # Delimiter
     '"',   # Enclosure
     '\\'   # Escape char
-  );
+    );
 
-  
-  $i=0;
-  while($i<count($parsedIng)-1){
-    $parsedIng[$i];
-    $Ing_test = $parsedIng[$i];
-    if(!ctype_digit(substr($Ing_test,0,strpos($Ing_test, '-')))){
+
+$i=0;
+while($i<count($parsedIng)-1){
+  $parsedIng[$i];
+  $Ing_test = $parsedIng[$i];
+  if(!ctype_digit(substr($Ing_test,0,strpos($Ing_test, '-')))){
+    array_push($errors,"Veuillez saisir des ingrédient selon la formule proposée");
+  }else{
+    $Ing_test=substr($Ing_test,strpos($Ing_test, '-')+1);
+    $Ing_test=substr($Ing_test,0,strpos($Ing_test, '-'));
+    if($Ing_test != 'g' && $Ing_test != 'kg' && $Ing_test != 'l' && $Ing_test != 'ml' && $Ing_test != 'pince' && $Ing_test != 'cant' && $Ing_test != 'cuillere' ){
       array_push($errors,"Veuillez saisir des ingrédient selon la formule proposée");
-    }else{
-      $Ing_test=substr($Ing_test,strpos($Ing_test, '-')+1);
-      $Ing_test=substr($Ing_test,0,strpos($Ing_test, '-'));
-      if($Ing_test != 'g' && $Ing_test != 'kg' && $Ing_test != 'l' && $Ing_test != 'ml' && $Ing_test != 'pince' && $Ing_test != 'cant' && $Ing_test != 'cuillere' ){
-        array_push($errors,"Veuillez saisir des ingrédient selon la formule proposée");
-      }
     }
-    $i++;
   }
+  $i++;
+}
 
-  $parsedEt = str_getcsv(
+$parsedEt = str_getcsv(
     $Etapes, # Input line
     '{',   # Delimiter
     '"',   # Enclosure
     '\\'   # Escape char
-  );
+    );
 
-  
+
+$i=0;
+while($i<count($parsedEt)-1){
+  $parsedEt[$i];
+  $i++;
+}
+
+
+$iduser = $_SESSION['userid'];
+$now = date("Y-m-d");
+if (count($errors) == 0) {
+
+  $resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
+
+  $query = "INSERT INTO recette (titre,iduser,date,photo,statut) 
+  VALUES('$titre','$iduser','$now','test',0)";
+  mysqli_query($db, $query);
+
+  $query = "SELECT * FROM recette WHERE id > 0 ORDER BY id DESC LIMIT 1";
+  $results = mysqli_query($db, $query);
+  if (mysqli_num_rows($results) == 1) {
+    while ($row = mysqli_fetch_assoc($results))
+    {
+      $idrecette = $row['id'];
+    }
+  }
+  $nomphoto = $idrecette . substr($nombre,strpos($nombre, '.'),4);
+  $query = "UPDATE recette SET photo ='$nomphoto' where id='$idrecette'; ";
+  $results = mysqli_query($db, $query);
+
+
+  $path = "./img"; 
+  $dh = opendir($path); 
+  $i=1; 
+  while (($file = readdir($dh)) !== false) {
+
+    if($file != "." && $file != "..") { 
+      rename($path."/".$file, $path . "/".str_replace($nombrer,$nomphoto,$file)); 
+      $i++; 
+    } 
+  } 
+  closedir($dh); 
+
+
+  $query = "INSERT INTO information (idrecette,dureecui,dureerepos,dureeprep,diff,cout,categorie) 
+  VALUES('$idrecette','$dureecui','$dureerepos','$dureeprepa',$diff,$cout,'$categorie')";
+  mysqli_query($db, $query);
+  $query = "INSERT INTO ingredients (idrecette,nom) 
+  VALUES('$idrecette','$Ingredients')";
+  mysqli_query($db, $query);
+  $query = "INSERT INTO utensilles (idrecette,nom) 
+  VALUES('$idrecette','$Utensilles')";
+  mysqli_query($db, $query);
   $i=0;
   while($i<count($parsedEt)-1){
-    $parsedEt[$i];
+    $query = "INSERT INTO etapes (idrecette,idordre,nom) 
+    VALUES('$idrecette',$i,'$parsedEt[$i]')";
+    mysqli_query($db, $query);
     $i++;
   }
-  
-
-  $iduser = $_SESSION['userid'];
-  $now = date("Y-m-d");
-  if (count($errors) == 0) {
-
-    $resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
-
-    $query = "INSERT INTO recette (titre,iduser,date,photo,statut) 
-          VALUES('$titre','$iduser','$now','test',0)";
-    mysqli_query($db, $query);
-
-    $query = "SELECT * FROM recette WHERE id > 0 ORDER BY id DESC LIMIT 1";
-    $results = mysqli_query($db, $query);
-    if (mysqli_num_rows($results) == 1) {
-      while ($row = mysqli_fetch_assoc($results))
-      {
-        $idrecette = $row['id'];
-      }
-    }
-    $nomphoto = $idrecette . substr($nombre,strpos($nombre, '.'),4);
-    $query = "UPDATE recette SET photo ='$nomphoto' where id='$idrecette'; ";
-    $results = mysqli_query($db, $query);
-
-    
-    $path = "./img"; 
-    $dh = opendir($path); 
-    $i=1; 
-    while (($file = readdir($dh)) !== false) {
-        
-        if($file != "." && $file != "..") { 
-            rename($path."/".$file, $path . "/".str_replace($nombrer,$nomphoto,$file)); 
-            $i++; 
-        } 
-    } 
-    closedir($dh); 
-
-
-    $query = "INSERT INTO information (idrecette,dureecui,dureerepos,dureeprep,diff,cout,categorie) 
-    VALUES('$idrecette','$dureecui','$dureerepos','$dureeprepa',$diff,$cout,'$categorie')";
-    mysqli_query($db, $query);
-    $query = "INSERT INTO ingredients (idrecette,nom) 
-    VALUES('$idrecette','$Ingredients')";
-    mysqli_query($db, $query);
-    $query = "INSERT INTO utensilles (idrecette,nom) 
-    VALUES('$idrecette','$Utensilles')";
-    mysqli_query($db, $query);
-    $i=0;
-    while($i<count($parsedEt)-1){
-      $query = "INSERT INTO etapes (idrecette,idordre,nom) 
-                VALUES('$idrecette',$i,'$parsedEt[$i]')";
-      mysqli_query($db, $query);
-      $i++;
-    }
-    header('location: index.php');
-  }
+  header('location: index.php');
+}
 }
 
 ?>

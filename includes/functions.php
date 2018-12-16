@@ -9,6 +9,24 @@ function getRecettesMod() {
   return $result;
 }
 
+function getCommentaires($idRecette) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM commentaire where idrecette = '$idRecette'";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result;
+}
+
+function getNomUser($idUser) {
+  include('setup.php');
+
+  $user_check_query = "SELECT username FROM person where id = '$idUser'";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result->fetch_assoc();
+}
+
 function getUtilisateurs() {
   include('setup.php');
 
