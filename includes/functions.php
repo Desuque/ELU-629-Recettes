@@ -28,7 +28,7 @@ function getIngredients($idRecette) {
 function getEtapes($idRecette) {
   include('setup.php');
 
-  $user_check_query = "SELECT * FROM etapes where idrecette = '$idRecette' ORDER BY idordre DESC";
+  $user_check_query = "SELECT * FROM etapes where idrecette = '$idRecette' ORDER BY idordre ASC";
   $result = mysqli_query($db, $user_check_query);
 
   return $result;
