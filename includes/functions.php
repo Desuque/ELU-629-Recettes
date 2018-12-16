@@ -17,6 +17,30 @@ function getCommentaires($idRecette) {
 
   return $result;
 }
+function getIngredients($idRecette) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM ingredients where idrecette = '$idRecette'";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result->fetch_assoc();
+}
+function getEtapes($idRecette) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM etapes where idrecette = '$idRecette' ORDER BY idordre DESC";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result;
+}
+function getUtensilles($idRecette) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM utensilles where idrecette = '$idRecette'";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result->fetch_assoc();
+}
 
 function getNomUser($idUser) {
   include('setup.php');
@@ -120,16 +144,7 @@ function getUser($idUser) {
 function getLastsRecettes() {
   include('setup.php');
 
-  $user_check_query = "SELECT * FROM recette WHERE statut = 1 ORDER BY id DESC LIMIT 10";
-  $result = mysqli_query($db, $user_check_query);
-
-  return $result;
-}
-
-function getEtapes($idRecette) {
-  include('setup.php');
-
-  $user_check_query = "SELECT * FROM etapes where idred = '$idRecette' ORDER BY idordre DESC";
+  $user_check_query = "SELECT * FROM recette WHERE statut = 1 ORDER BY id DESC";
   $result = mysqli_query($db, $user_check_query);
 
   return $result;

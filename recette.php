@@ -7,6 +7,8 @@ $row_cnt = count(getRecette($idRct));
 if ((isset($_GET["idRecette"])) && ($row_cnt > 0) && (canReadRecette($idRct))) {
 	$recette = getRecette($idRct);
 	$information = getInformation($idRct);
+	$ingredients = getIngredients($idRct);
+	$utensilles = getUtensilles($idRct);
 }
 else {
 	header("Location:index.php");
@@ -143,12 +145,73 @@ else {
 						</div>
 						<div class="col-3 col-12-small">
 							<h3>
-								<?php echo $information['categorie']; ?>
+								<?php 
+								$parsedIng = str_getcsv(
+									$ingredients['nom'], # Input line
+									'{',   # Delimiter
+									'"',   # Enclosure
+									'\\'   # Escape char
+								  );
+								
+								  
+								$i=0;
+								while($i<count($parsedIng)-1){
+									$parsedIng[$i];
+									$Ing_test = $parsedIng[$i];
+									echo $ingCant = substr($Ing_test,0,strpos($Ing_test, '-'))."\n";
+									$Ing_test=substr($Ing_test,strpos($Ing_test, '-')+1);
+									echo $ingUn=substr($Ing_test,0,strpos($Ing_test, '-'))."\n";
+									echo $ingNom=substr($Ing_test,strpos($Ing_test, '-')+1);
+									echo "<br/>";
+									$i++;
+								} 
+								  ?>
 							</h3>
 						</div>
 					</div>
 
 					<br/>
+					<div class="row gtr-uniform">
+						<div class="col-3 col-12-small">
+							<h4>Utensilles:</h4>
+						</div>
+						<div class="col-3 col-12-small">
+							<h3>
+								<?php 
+								$parsedUt = str_getcsv(
+									$utensilles['nom'], # Input line
+									'{',   # Delimiter
+									'"',   # Enclosure
+									'\\'   # Escape char
+								  );
+								
+								  
+								$i=0;
+								while($i<count($parsedUt)-1){
+									echo $parsedUt[$i];
+									echo "<br/>";
+									$i++;
+								} 
+								  ?>
+							</h3>
+						</div>
+					</div>
+
+					<?php
+					$etapes = getEtapes($idRct);
+					$i = 1;
+					while ($etape = $etapes->fetch_assoc()) {
+						?>
+
+						<h2 id="content">Étape <?php echo $i ?></h2>
+						<p><?php echo $etape['nom']; ?></p>
+						
+						<?php
+						$i++;
+					}
+					?>
+
+					
 
 
 
