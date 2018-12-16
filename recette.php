@@ -143,15 +143,28 @@ else {
 						</div>
 						<div class="col-3 col-12-small">
 							<h3>
-								<?php echo $information['categorie'] ?>
+								<?php echo $information['categorie']; ?>
 							</h3>
 						</div>
 					</div>
 
-					<h2 id="content">Sample Content</h2>
-					<p>Praesent ac adipiscing ullamcorper semper ut amet ac risus. Lorem sapien ut odio odio nunc. Ac adipiscing nibh porttitor erat risus justo adipiscing adipiscing amet placerat accumsan. Vis. Faucibus odio magna tempus adipiscing a non. In mi primis arcu ut non accumsan vivamus ac blandit adipiscing adipiscing arcu metus praesent turpis eu ac lacinia nunc ac commodo gravida adipiscing eget accumsan ac nunc adipiscing adipiscing lorem ipsum dolor sit amet nullam veroeros adipiscing.</p>
-				</section>
+					<br/>
 
+					<?php
+					$etapes = getEtapes($idRct);
+					$i = 1;
+					while ($etape = $etapes->fetch_assoc()) {
+						?>
+
+						<h2 id="content">Étape <?php echo $i ?></h2>
+						<p><?php echo $etape['nom']; ?></p>
+						
+						<?php
+						$i++;
+					}
+					?>
+
+				</section>
 
 				<section>
 					<header class="major">

@@ -126,4 +126,13 @@ function getLastsRecettes() {
   return $result;
 }
 
+function getEtapes($idRecette) {
+  include('setup.php');
+
+  $user_check_query = "SELECT * FROM etapes where idred = '$idRecette' ORDER BY idordre DESC";
+  $result = mysqli_query($db, $user_check_query);
+
+  return $result;
+}
+
 ?>
