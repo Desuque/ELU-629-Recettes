@@ -166,6 +166,18 @@ else {
 						<h3><?php $user = getNomUser($com['iduser']); echo ($user['username']); ?> | <?php echo($com['date']); ?></h3>
 						<blockquote><?php echo($com['texte']); ?></blockquote>
 
+						<?php  if ((isAdministrator()) || (isOwer($idRct))) : ?>
+							<form method="post" action='<?php echo ('/recette.php?idRecette=' . $idRct ) ?>'>
+								<div class="col-12">
+									<ul class="actions">
+										<input type="hidden" name="idcommentaire" id="demo-name" value='<?php echo ($com['id']) ?>' />
+										<li><input type="submit" value="Supprimer" class="primary" name="delete_recette" /></li>
+									</ul>
+								</div>
+							</form>
+
+						<?php endif ?>
+
 						<?php
 					}
 					?>

@@ -42,6 +42,14 @@ if (isset($_POST['new_comment'])) {
   }
 }
 
+if (isset($_POST['delete_recette'])) {
+  $idcommentaire = $_POST['idcommentaire'];
+
+  $query = "DELETE FROM commentaire WHERE id = '$idcommentaire'";
+
+  mysqli_query($db, $query);
+}
+
 if (isset($_POST['reg_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
