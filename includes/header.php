@@ -15,10 +15,10 @@
 				<div class="row gtr-uniform">
 
 					<div class="col-6 col-12-xsmall">
-						<input type="text" name="username" placeholder="Utilisateur">
+						<input type="text" name="username" placeholder="Utilisateur" maxlength="50">
 					</div>
 					<div class="col-6 col-12-xsmall">
-						<input type="password" name="password" placeholder="Mot de passe">
+						<input type="password" name="password" placeholder="Mot de passe" maxlength="50">
 					</div>
 
 					<div class="col-12">

@@ -26,19 +26,19 @@
 						<div class="row gtr-uniform">
 							<div class="col-6 col-12-xsmall">
 								<h3>Utilisateur:</h3>
-								<input type="text" name="username" id="demo-name" placeholder="Utilisateur" />
+								<input type="text" name="username" id="demo-name" placeholder="Utilisateur" maxlength="50" />
 							</div>
 							<div class="col-6 col-12-xsmall">
 								<h3>Email:</h3>
-								<input type="email" name="email" id="demo-email" placeholder="Email" />
+								<input type="email" name="email" id="demo-email" placeholder="Email" maxlength="100" />
 							</div>
 							<div class="col-6 col-12-xsmall">
 								<h3>Mot de passe:</h3>
-								<input type="password" name="password_1" id="demo-pass" placeholder="Mot de passe" />
+								<input type="password" name="password_1" id="demo-pass" placeholder="Mot de passe" maxlength="50" />
 							</div>
 							<div class="col-6 col-12-xsmall">
 								<h3>Mot de passe:</h3>
-								<input type="password" name="password_2" id="demo-pass" placeholder="Mot de passe" />
+								<input type="password" name="password_2" id="demo-pass" placeholder="Mot de passe" maxlength="50" />
 							</div>
 
 							<div class="col-12">
