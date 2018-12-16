@@ -62,7 +62,7 @@ function getUtilisateurs() {
 
 function isAdministrator() {
   include('setup.php');
-
+  if(isset($_SESSION['userid'])){
   $idUser = $_SESSION['userid'];
   $user_check_query = "SELECT * FROM person where id = '$idUser'";
   $result = mysqli_query($db, $user_check_query);
@@ -71,13 +71,13 @@ function isAdministrator() {
   if ($user['type'] == 3) { // 3 -> Administrator
     return true;
   }
-
+  }
   return false;
 }
 
 function isOwer($idRecette) {
   include('setup.php');
-
+  if(isset($_SESSION['userid'])){
   $idUser = $_SESSION['userid'];
   $user_check_query = "SELECT * FROM recette where id = '$idRecette'";
   $result = mysqli_query($db, $user_check_query);
@@ -86,7 +86,7 @@ function isOwer($idRecette) {
   if ($recette['iduser'] == $idUser) {
     return true;
   }
-
+  }
   return false;
 }
 
@@ -149,5 +149,64 @@ function getLastsRecettes() {
 
   return $result;
 }
+
+/*---- OTROS COMENTARIOS ----*/
+
+
+function getComments($idrec) {
+    include('setup.php');
+
+    $comment_query = "SELECT * FROM comments where idrec = '$idrec'";
+    $result = mysqli_query($db, $comment_query);
+
+    return $result;
+
+}
+
+function myComments($idrec,$id) {
+    include('setup.php');
+
+    $mycomment_query = "SELECT * FROM comments where idrec = '$idrec' and id = '$id'";
+    $result = mysqli_query($db, $mycomment_query);
+
+    $user = $result->fetch_assoc();
+    if (isset($_SESSION["username"])){$username = $_SESSION["username"];
+        if ($user['username'] == $username) {
+            return true;
+        }
+    }
+    return false;
+
+}
+
+function isUser() {
+    include('setup.php');
+
+    if (isset($_SESSION["userid"])) {
+        $idUser = $_SESSION['userid'];
+        $user_check_query = "SELECT * FROM person where id = '$idUser'";
+        $result = mysqli_query($db, $user_check_query);
+
+        $user = $result->fetch_assoc();
+        if ($user['type'] == 0 or $user['type'] == 3) { // 3 -> User available or Administrator
+            return true;
+        }
+    }
+    return false;
+}
+
+
+function canAddComment($idRecette) {
+    include('setup.php');
+
+    if(isset($_SESSION['username']) and !isOwer($idRecette)) {
+        return true;
+        echo "hola";
+    }
+
+    return false;
+}
+
+
 
 ?>

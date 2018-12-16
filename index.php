@@ -38,11 +38,11 @@ if (isset($_GET['logout'])) {
 							?>
 
 							<article>
-								<a href='<?php echo ('/recette.php?idRecette=' . $rec['id']) ?>' class="image"><img src='<?php echo ('img/' . $rec['photo']) ?>' /></a>
+								<a href='<?php echo ('./recette.php?idRecette=' . $rec['id']) ?>' class="image"><img src='<?php echo ('img/' . $rec['photo']) ?>' /></a>
 								<h3><?php echo($rec['titre']); ?></h3>
 								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 								<ul class="actions">
-									<li><a href='<?php echo ('/recette.php?idRecette=' . $rec['id']) ?>' class="button">Lire</a></li>
+									<li><a href='<?php echo ('./recette.php?idRecette=' . $rec['id']) ?>' class="button">Lire</a></li>
 								</ul>
 							</article>
 

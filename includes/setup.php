@@ -1,5 +1,5 @@
 <?php
-$db = mysqli_connect('localhost', 'root', 'root123', 'recette');
+$db = mysqli_connect('localhost', 'root', 'sqlroot', 'recette');
 
 if (!$db) {
     echo "Erreur: Impossible de se connecter à MySQL." . PHP_EOL;
