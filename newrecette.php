@@ -1,4 +1,5 @@
 <?php include 'includes/server.php' ?>
+<?php include 'includes/functions.php' ?>
 
 <!DOCTYPE HTML>
 <html>
