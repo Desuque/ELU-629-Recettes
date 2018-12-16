@@ -117,7 +117,7 @@ else {
 									<?php
 									$i = 0;
 									$cout = $information['cout'];
-									while ($i<5) {
+									while ($i<3) {
 										if ($i < $cout) {
 											?>
 											<a style="color: #f56a6a;">&#9733;</a>
@@ -151,6 +151,39 @@ else {
 					<h2 id="content">Sample Content</h2>
 					<p>Praesent ac adipiscing ullamcorper semper ut amet ac risus. Lorem sapien ut odio odio nunc. Ac adipiscing nibh porttitor erat risus justo adipiscing adipiscing amet placerat accumsan. Vis. Faucibus odio magna tempus adipiscing a non. In mi primis arcu ut non accumsan vivamus ac blandit adipiscing adipiscing arcu metus praesent turpis eu ac lacinia nunc ac commodo gravida adipiscing eget accumsan ac nunc adipiscing adipiscing lorem ipsum dolor sit amet nullam veroeros adipiscing.</p>
 				</section>
+
+
+				<section>
+					<header class="major">
+						<h2>Commentaires</h2>
+					</header>
+
+					<?php
+					$recettes_mod = getRecettesMod();
+					while ($rec = $recettes_mod->fetch_assoc()) {
+						?>
+
+						<h3>Blockquote</h3>
+						<blockquote>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.</blockquote>
+
+						<?php
+					}
+					?>
+					
+					<?php  if (isset($_SESSION['username']) && (!isOwer($idRct))) : ?>
+						<div class="col-12">
+							<textarea name="demo-message" id="demo-message" placeholder="Entrez votre message" rows="6" maxlength="500" name="Commentaire" /></textarea>
+						</div>
+						<br/>
+						<div class="col-12">
+							<ul class="actions">
+								<li><input type="submit" value="Envoyer le message" class="primary" name="new_comment" /></li>
+							</ul>
+						</div>
+					<?php endif ?>
+				</section>
+
+
 			</div>
 		</div>
 
