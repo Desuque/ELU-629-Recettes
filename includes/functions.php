@@ -192,6 +192,21 @@ function isUser() {
             return true;
         }
     }
+    elseif(isset($_SESSION["username"])){
+      $username = $_SESSION["username"];
+      $user_id_check_query = "SELECT * FROM person where username = '$username'";
+      $result = mysqli_query($db, $user_id_check_query);
+      $result_text = $result->fetch_assoc();
+      $idUser = $result_text['id'];
+      $_SESSION['userid'] = $idUser;
+      $user_check_query = "SELECT * FROM person where id = '$idUser'";
+      $result = mysqli_query($db, $user_check_query);
+
+      $user = $result->fetch_assoc();
+      if ($user['type'] == 0 or $user['type'] == 3) { // 3 -> User available or Administrator
+          return true;
+      }
+    }
     return false;
 }
 
@@ -207,6 +222,17 @@ function canAddComment($idRecette) {
     return false;
 }
 
+function getOneComment($idrec,$idcom) {
+  include('setup.php');
+
+  if (isset($_SESSION["username"])){$username = $_SESSION["username"];
+
+  $comment_query = "SELECT commentaire FROM comments where idrec = '$idrec' and id = '$idcom'";
+  $result = mysqli_query($db, $comment_query);
+  $result_text = $result->fetch_assoc();
+  return $result_text['commentaire'];
+  }
+}
 
 
 ?>

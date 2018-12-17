@@ -377,7 +377,7 @@ else {
 
                                 <!-- Break -->
                                 <div class="col-12">
-                                    <textarea name="commentaire" id="demo-message" value="<?php echo $commentaire; ?>" placeholder="Éditer commentaire" rows="6"></textarea>
+                                    <textarea name="commentaire" id="demo-message" value="<?php echo $commentaire; ?>" placeholder="Éditer commentaire" rows="6"><?php echo getOneComment($idrec, $id_comment); ?></textarea>
                                 </div>
                                 <!-- Break -->
                                 <div class="col-12">
