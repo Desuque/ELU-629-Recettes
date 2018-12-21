@@ -112,7 +112,7 @@ else {
 
 					<div class="row gtr-uniform">
 						<div class="col-3 col-12-small">
-							<h4>Precio:</h4>
+							<h4>Prix:</h4>
 						</div>
 						<div class="col-3 col-12-small">
 							<h3>
@@ -144,7 +144,7 @@ else {
 						<div class="col-3 col-12-small">
 							<h4>Ingredients:</h4>
 						</div>
-						<div class="col-3 col-12-small">
+						<div class="col-6 col-12-small">
 							<h3>
 								<?php 
 								$parsedIng = str_getcsv(
@@ -174,9 +174,9 @@ else {
 					<br/>
 					<div class="row gtr-uniform">
 						<div class="col-3 col-12-small">
-							<h4>Utensilles:</h4>
+							<h4>Ustensiles:</h4>
 						</div>
-						<div class="col-3 col-12-small">
+						<div class="col-6 col-12-small">
 							<h3>
 								<?php 
 								$parsedUt = str_getcsv(
@@ -212,57 +212,6 @@ else {
 					}
 					?>
 
-					
-
-
-
-				</section>
-
-				<?php /*<section>
-					<header class="major">
-						<h2>Commentaires</h2>
-					</header>
-
-					<?php
-					$Commentaires = getCommentaires($idRct);
-					while ($com = $Commentaires->fetch_assoc()) {
-						?>
-
-						<h3><?php $user = getNomUser($com['iduser']); echo ($user['username']); ?> | <?php echo($com['date']); ?></h3>
-						<blockquote><?php echo($com['texte']); ?></blockquote>
-
-						<?php  if ((isAdministrator()) || (isOwer($idRct))) : ?>
-							<form method="post" action='<?php echo ('./recette.php?idRecette=' . $idRct ) ?>'>
-								<div class="col-12">
-									<ul class="actions">
-										<input type="hidden" name="idcommentaire" id="demo-name" value='<?php echo ($com['id']) ?>' />
-										<li><input type="submit" value="Supprimer" class="primary" name="delete_recette" /></li>
-									</ul>
-								</div>
-							</form>
-
-						<?php endif ?>
-
-						<?php
-					}
-					?>
-
-					<?php  if (isset($_SESSION['username']) && (!isOwer($idRct))) : ?>
-						<form method="post" action='<?php echo ('./recette.php?idRecette=' . $idRct ) ?>'>
-							<?php include 'includes/errors.php'; ?>
-							<div class="col-12">
-								<input type="hidden" name="idrecette" id="demo-name" value='<?php echo ($idRct) ?>' />
-								<textarea id="demo-message" placeholder="Entrez votre message" rows="6" maxlength="500" name="commentaire" /></textarea>
-							</div>
-							<br/>
-							<div class="col-12">
-								<ul class="actions">
-									<li><input type="submit" value="Envoyer le message" class="primary" name="new_comment" /></li>
-								</ul>
-							</div>
-						</form>
-					<?php endif ?>
-				</section> */ ?>
 
                 <?php $idrec = $idRct;?>
                 <?php $result = getComments($idrec);?>
